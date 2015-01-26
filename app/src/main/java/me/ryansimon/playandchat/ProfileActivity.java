@@ -4,17 +4,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-
-import java.io.BufferedReader;
-import java.io.Reader;
+import com.squareup.picasso.Picasso;
 
 import me.ryansimon.playandchat.api.model.Profile;
 import me.ryansimon.playandchat.util.JsonUtil;
 
-
+/**
+ * @author Ryan Simon
+ */
 public class ProfileActivity extends ActionBarActivity {
 
     @Override
@@ -24,10 +24,13 @@ public class ProfileActivity extends ActionBarActivity {
 
         Gson gson = new Gson();
         Profile profile = gson.fromJson(JsonUtil.loadJsonFromFile(this),Profile.class);
-        
         profile.getName();
-    }
 
+        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
+        
+        Picasso.with(this).load(profile.getBackgroundImage())
+                .into(imageView);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
