@@ -1,11 +1,15 @@
 package me.ryansimon.playandchat;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +17,13 @@ import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.ryansimon.playandchat.api.model.Profile;
@@ -25,13 +36,15 @@ import me.ryansimon.playandchat.widget.TypefaceTextView;
  */
 public class ProfileActivity extends ActionBarActivity {
 
+    private static final String PROFILE_URL = "http://prototype.playchat.net/test/profile.json";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
         setupToolbar();
-        setupProfileUI();
+        new DownloadFileFromURL().execute(PROFILE_URL);
     }
 
     @Override
@@ -73,7 +86,11 @@ public class ProfileActivity extends ActionBarActivity {
     
     private void setupProfileUI() {
         Gson gson = new Gson();
-        Profile profile = gson.fromJson(JsonUtil.loadJsonFromFile(this),Profile.class);
+        Profile profile = gson.fromJson(
+                JsonUtil.loadJsonFromExternal(Environment.getExternalStorageDirectory().toString(),
+                        "profile.json"),
+                Profile.class
+        );
 
         // get layout vars
         TypefaceTextView userName = (TypefaceTextView) findViewById(R.id.name);
@@ -113,5 +130,101 @@ public class ProfileActivity extends ActionBarActivity {
                 builder.show();
             }
         });
+    }
+
+
+    /**
+     * Downloads a file at the given URL string, and shows a ProgressDialog during the download
+     * 
+     * Adapted from http://stackoverflow.com/questions/15758856/android-how-to-download-file-from-webserver
+     */
+    private class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        private ProgressDialog mProfileFileProgressDialog;
+        
+        private void setupProfileDownloadDialog() {
+            mProfileFileProgressDialog = new ProgressDialog(ProfileActivity.this);
+            mProfileFileProgressDialog.setMessage("Downloading Profile Information. Please wait...");
+            mProfileFileProgressDialog.setIndeterminate(false);
+            mProfileFileProgressDialog.setMax(100);
+            mProfileFileProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProfileFileProgressDialog.setCancelable(true);
+            mProfileFileProgressDialog.show();
+        }
+        
+        /**
+         * Before starting background thread Show Progress Bar Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            setupProfileDownloadDialog();
+        }
+
+        /**
+         * Downloading file in background thread
+         * */
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+
+                // we'll use this to calculate our progress
+                int lengthOfFile = connection.getContentLength();
+
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream(),
+                        8192);
+
+                // output file
+                OutputStream output = new FileOutputStream(Environment
+                        .getExternalStorageDirectory().toString()
+                        + "/profile.json");
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                // read in our content
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    publishProgress("" + (int) ((total * 100) / lengthOfFile));
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            return null;
+        }
+
+        /**
+         * Updating progress bar
+         * */
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            mProfileFileProgressDialog.setProgress(Integer.parseInt(progress[0]));
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        @Override
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after the file was downloaded
+            mProfileFileProgressDialog.dismiss();
+            setupProfileUI();
+        }
     }
 }
