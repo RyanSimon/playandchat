@@ -7,5 +7,7 @@
     <string name="profile_location_img_desc">User profile country flag</string>
     <string name="edit_profile">Edit</string>
     <string name="action_settings">Settings</string>
+    <string name="edit_dialog_message">This is just a test</string>
+    <string name="edit_dialog_confimation">OK</string>
 
 </resources>

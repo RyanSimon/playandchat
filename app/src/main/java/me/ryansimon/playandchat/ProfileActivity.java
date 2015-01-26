@@ -1,5 +1,7 @@
 package me.ryansimon.playandchat;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.ryansimon.playandchat.api.model.Profile;
 import me.ryansimon.playandchat.util.JsonUtil;
+import me.ryansimon.playandchat.widget.TypefaceButton;
 import me.ryansimon.playandchat.widget.TypefaceTextView;
 
 /**
@@ -79,6 +82,7 @@ public class ProfileActivity extends ActionBarActivity {
         ImageView userCountryFlag = (ImageView) findViewById(R.id.user_country_flag);
         ImageView backgroundImage = (ImageView) findViewById(R.id.background_image);
         CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
+        TypefaceButton editProfile = (TypefaceButton) findViewById(R.id.edit_profile_btn);
 
         // load content
         userName.setText(profile.getName());
@@ -95,5 +99,19 @@ public class ProfileActivity extends ActionBarActivity {
 
         Picasso.with(this).load(profile.getPhotoUrl())
                 .into(profileImage);
+        
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setMessage(R.string.edit_dialog_message)
+                        .setPositiveButton(R.string.edit_dialog_confimation, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+            }
+        });
     }
 }
