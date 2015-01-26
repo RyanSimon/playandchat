@@ -5,6 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import java.io.BufferedReader;
+import java.io.Reader;
+
+import me.ryansimon.playandchat.api.model.Profile;
+import me.ryansimon.playandchat.util.JsonUtil;
+
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -12,6 +21,11 @@ public class ProfileActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        Gson gson = new Gson();
+        Profile profile = gson.fromJson(JsonUtil.loadJsonFromFile(this),Profile.class);
+        
+        profile.getName();
     }
 
 
