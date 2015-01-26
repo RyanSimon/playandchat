@@ -1,4 +1,4 @@
-package me.ryansimon.planandchat.util;
+package me.ryansimon.playandchat.util;
 
 import android.content.Context;
 import android.graphics.Typeface;

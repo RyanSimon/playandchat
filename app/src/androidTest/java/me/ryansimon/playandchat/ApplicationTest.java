@@ -1,4 +1,4 @@
-package me.ryansimon.planandchat;
+package me.ryansimon.playandchat;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

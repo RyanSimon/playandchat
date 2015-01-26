@@ -1,7 +1,7 @@
-package me.ryansimon.planandchat.widget;
+package me.ryansimon.playandchat.widget;
 
-import me.ryansimon.planandchat.R;
-import me.ryansimon.planandchat.util.TypefaceUtil;
+import me.ryansimon.playandchat.R;
+import me.ryansimon.playandchat.util.TypefaceUtil;
 
 import android.content.Context;
 import android.content.res.TypedArray;

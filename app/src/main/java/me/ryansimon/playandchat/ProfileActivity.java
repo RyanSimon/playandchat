@@ -1,4 +1,4 @@
-package me.ryansimon.planandchat;
+package me.ryansimon.playandchat;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
