@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * @author Ryan Simon
  *  
- * Use custom fonts with a Text View
+ * Use custom fonts with a TextView; defaults to OpenSans Regular
  */
 public class TypefaceTextView extends TextView {
 
