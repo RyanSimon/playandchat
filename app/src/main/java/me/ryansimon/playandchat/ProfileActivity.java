@@ -1,16 +1,21 @@
 package me.ryansimon.playandchat;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import me.ryansimon.playandchat.api.model.Profile;
 import me.ryansimon.playandchat.util.JsonUtil;
+import me.ryansimon.playandchat.widget.TypefaceTextView;
 
 /**
  * @author Ryan Simon
@@ -22,14 +27,8 @@ public class ProfileActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Gson gson = new Gson();
-        Profile profile = gson.fromJson(JsonUtil.loadJsonFromFile(this),Profile.class);
-        profile.getName();
-
-        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
-        
-        Picasso.with(this).load(profile.getBackgroundImage())
-                .into(imageView);
+        setupToolbar();
+        setupProfileUI();
     }
 
     @Override
@@ -52,5 +51,49 @@ public class ProfileActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    /***** HELPER METHODS *****/
+
+    /**
+     * Sets up Toolbar and the title of the Activity
+     */
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        
+        // now that we set the ActionBar, we need to edit it
+        ActionBar actualActionBar = getSupportActionBar();
+        actualActionBar.setHomeAsUpIndicator(getResources().getDrawable(R.drawable.back_button));
+        actualActionBar.setTitle("");
+    }
+    
+    private void setupProfileUI() {
+        Gson gson = new Gson();
+        Profile profile = gson.fromJson(JsonUtil.loadJsonFromFile(this),Profile.class);
+
+        // get layout vars
+        TypefaceTextView userName = (TypefaceTextView) findViewById(R.id.name);
+        TypefaceTextView profileId = (TypefaceTextView) findViewById(R.id.profile_id);
+        TypefaceTextView location = (TypefaceTextView) findViewById(R.id.location);
+        ImageView userCountryFlag = (ImageView) findViewById(R.id.user_country_flag);
+        ImageView backgroundImage = (ImageView) findViewById(R.id.background_image);
+        CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
+
+        // load content
+        userName.setText(profile.getName());
+        
+        profileId.setText("(" + profile.getPlayChatId() + ")");
+        
+        location.setText(profile.getLocation());
+        
+        Picasso.with(this).load(profile.getFlagImage())
+                .into(userCountryFlag);
+        
+        Picasso.with(this).load(profile.getBackgroundImage())
+                .into(backgroundImage);
+
+        Picasso.with(this).load(profile.getPhotoUrl())
+                .into(profileImage);
     }
 }

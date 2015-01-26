@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <!-- General strings -->
     <string name="app_name">Play and Chat</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <!-- Profile strings -->
+    <string name="profile_location_img_desc">User profile country flag</string>
+    <string name="edit_profile">Edit</string>
     <string name="action_settings">Settings</string>
 
 </resources>

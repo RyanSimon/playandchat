@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    
+    <!-- Profile colors -->
+    <color name="profile_edit_button">#3CA8E0</color>
+    
+</resources>
