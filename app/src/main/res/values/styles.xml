@@ -4,5 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
+    
+    <!-- Default TypefaceTextView Style -->
+    <style name="TypefaceTextViewStyle" parent="android:Widget.Holo.TextView">
+        <item name="typeface">OpenSans-Regular</item>
+    </style>
 
 </resources>
