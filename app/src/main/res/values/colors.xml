@@ -7,7 +7,7 @@
     
     <!-- General colors -->
     <color name="white">#FFFFFF</color>
-    <color name="white_thirty_opa">#25FFFFFF</color>
+    <color name="grey_thiry_opa">#25212121</color>
     
     <!-- Profile colors -->
     <color name="profile_edit_button">#3CA8E0</color>
