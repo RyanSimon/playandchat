@@ -3,8 +3,13 @@
     <declare-styleable name="TypefacedView">
         <attr name="typeface" format="string" />
     </declare-styleable>
+    
     <declare-styleable name="TypefacedTextViewTheme">
         <attr name="typefacedTextViewStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TypefacedEditTextViewTheme">
+        <attr name="typefacedEditTextViewStyle" format="reference" />
     </declare-styleable>
 </resources>
     

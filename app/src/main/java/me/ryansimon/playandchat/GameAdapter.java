@@ -1,5 +1,6 @@
 package me.ryansimon.playandchat;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
@@ -69,7 +70,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         private TypefaceTextView mGameRating;
         private TypefaceTextView mLastPlayedDate;
         
-        GameViewHolder(View itemView) {
+        GameViewHolder(final View itemView) {
             super(itemView);
             
             // get layout vars
@@ -77,6 +78,14 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
             mGameName = (TypefaceTextView) itemView.findViewById(R.id.game_name);
             mGameRating = (TypefaceTextView) itemView.findViewById(R.id.game_rating);
             mLastPlayedDate = (TypefaceTextView) itemView.findViewById(R.id.last_played_date);
+            
+            // point to the mock chess board
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(new Intent(v.getContext(),GameActivity.class));
+                }
+            });
         }
 
         /***** GETTER AND SETTERS *****/

@@ -48,6 +48,8 @@ public class ProfileActivity extends ActionBarActivity {
     private RecyclerView mGameListView;
     
     private static final String PROFILE_URL = "http://prototype.playchat.net/test/profile.json";
+
+    /***** ACTIVITY LIFECYCLE METHODS *****/
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

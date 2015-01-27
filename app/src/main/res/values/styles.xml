@@ -16,5 +16,10 @@
     <style name="TypefaceTextViewStyle" parent="android:Widget.Holo.TextView">
         <item name="typeface">OpenSans-Regular</item>
     </style>
+    
+    <!-- Default TypefaceEditText Style -->
+    <style name="TypefaceEditTextStyle" parent="android:Widget.Holo.EditText">
+        <item name="typeface">OpenSans-Regular</item>
+    </style>
 
 </resources>

@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.ryansimon.playandchat.GameActivity"
+    android:background="@drawable/chess_board">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="@color/chat_input_container" >
+        
+        <me.ryansimon.playandchat.widget.TypefaceEditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="Type here to chat"
+            android:textColorHint="@color/chat_hint_text"
+            android:drawableRight="@drawable/emoji"
+            android:drawableEnd="@drawable/emoji" />
+        
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/android:transparent"
+        app:titleTextAppearance="@style/ActionBarTitle"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+</RelativeLayout>

@@ -16,4 +16,8 @@
     <color name="last_played">#6A7276</color>
     <color name="game_list_separator_line">#C3CFD5</color>
     
+    <!-- Game colors -->
+    <color name="chat_input_container">#EFF2F4</color>
+    <color name="chat_hint_text">#6C6F73</color>
+    
 </resources>
