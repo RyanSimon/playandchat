@@ -73,21 +73,43 @@
                 
             </LinearLayout>
             
-            <me.ryansimon.playandchat.widget.TypefaceButton android:id="@+id/edit_profile_btn"
+            <RelativeLayout android:id="@+id/edit_profile_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/location_container"
-                android:layout_marginTop="10dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:gravity="center"
-                android:background="@drawable/edit_btn_background"
-                android:text="@string/edit_profile"
-                android:textSize="14sp"
-                android:textColor="@color/white" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <!-- quick and dirty way to do this for now -->
+                <me.ryansimon.playandchat.widget.TypefaceButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_depth_btn_background"
+                    android:text="@string/edit_profile"
+                    android:textSize="14sp" />
+                
+                <me.ryansimon.playandchat.widget.TypefaceButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:gravity="center"
+                    android:background="@drawable/edit_btn_background"
+                    android:text="@string/edit_profile"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    app:typeface="OpenSans-Semibold" />
+                
+            </RelativeLayout>
 
         </RelativeLayout>
 

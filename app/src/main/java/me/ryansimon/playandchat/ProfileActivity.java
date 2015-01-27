@@ -99,7 +99,7 @@ public class ProfileActivity extends ActionBarActivity {
         ImageView userCountryFlag = (ImageView) findViewById(R.id.user_country_flag);
         ImageView backgroundImage = (ImageView) findViewById(R.id.background_image);
         CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
-        TypefaceButton editProfile = (TypefaceButton) findViewById(R.id.edit_profile_btn);
+        View editProfile = findViewById(R.id.edit_profile_btn);
 
         // load content
         userName.setText(profile.getName());

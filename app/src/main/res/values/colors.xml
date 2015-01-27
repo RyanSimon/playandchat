@@ -4,5 +4,6 @@
     
     <!-- Profile colors -->
     <color name="profile_edit_button">#3CA8E0</color>
+    <color name="profile_edit_depth_button">#2881B9</color>
     
 </resources>
