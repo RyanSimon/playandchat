@@ -8,14 +8,18 @@ import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
@@ -24,8 +28,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.ryansimon.playandchat.api.model.Game;
 import me.ryansimon.playandchat.api.model.Profile;
 import me.ryansimon.playandchat.util.JsonUtil;
 import me.ryansimon.playandchat.widget.TypefaceButton;
@@ -36,6 +42,11 @@ import me.ryansimon.playandchat.widget.TypefaceTextView;
  */
 public class ProfileActivity extends ActionBarActivity {
 
+    /**
+     * Layout vars 
+     */
+    private RecyclerView mGameListView;
+    
     private static final String PROFILE_URL = "http://prototype.playchat.net/test/profile.json";
     
     @Override
@@ -44,6 +55,13 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
 
         setupToolbar();
+        
+        // setup our RecyclerView
+        mGameListView = (RecyclerView) findViewById(R.id.game_list);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mGameListView.setLayoutManager(llm);
+        
         new DownloadFileFromURL().execute(PROFILE_URL);
     }
 
@@ -130,8 +148,18 @@ public class ProfileActivity extends ActionBarActivity {
                 builder.show();
             }
         });
+        
+        setupGameList();
     }
+    
+    private void setupGameList() {
+        // get items
+        Gson gson = new Gson();
+        List<Game> gameList = gson.fromJson(JsonUtil.loadJsonFromAssets(this,"json/","games.json"),
+                new TypeToken<List<Game>>(){}.getType());
 
+        mGameListView.setAdapter(new GameAdapter(gameList));
+    }
 
     /**
      * Downloads a file at the given URL string, and shows a ProgressDialog during the download

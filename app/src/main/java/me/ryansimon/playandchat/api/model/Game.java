@@ -11,7 +11,7 @@ public class Game {
     private String mName;
 
     @SerializedName("game_image_url")
-    private String mGameImage;
+    private String mGameImageUrl;
 
     @SerializedName("rating")
     private String mRating;
@@ -22,14 +22,18 @@ public class Game {
     @SerializedName("last_played_date")
     private String mLastPlayedDate;
 
+    public Game() {
+        // needed for deserializing
+    }
+    
     /***** GETTERS AND SETTERS *****/
     
-    public String getGameImage() {
-        return mGameImage;
+    public String getGameImageUrl() {
+        return mGameImageUrl;
     }
 
-    public void setGameImage(String gameImage) {
-        mGameImage = gameImage;
+    public void setGameImageUrl(String gameImageUrl) {
+        mGameImageUrl = gameImageUrl;
     }
 
     public String getName() {

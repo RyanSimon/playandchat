@@ -5,5 +5,8 @@
     <!-- Profile colors -->
     <color name="profile_edit_button">#3CA8E0</color>
     <color name="profile_edit_depth_button">#2881B9</color>
+    <color name="game_name">#4BBCF5</color>
+    <color name="last_played">#6A7276</color>
+    <color name="game_list_separator_line">#C3CFD5</color>
     
 </resources>
