@@ -1,0 +1,18 @@
+{
+    "games": [
+        {
+            "name":"Pool",
+            "game_image_url":"http://ecx.images-amazon.com/images/I/817lh7O2gWL.png",
+            "rating":"1500",
+            "rating_hex_color":"#C44F08",
+            "last_played_date":"Last played 1 hour ago"
+        },
+        {
+            "name":"Chess",
+            "game_image_url":"http://www.appliandroid.fr/capture/376.jpg",
+            "rating":"1425",
+            "rating_hex_color":"#46C408",
+            "last_played_date":"Last played 1 hour ago"
+        }
+    ]
+}

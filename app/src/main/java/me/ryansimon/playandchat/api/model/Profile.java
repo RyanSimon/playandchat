@@ -25,6 +25,8 @@ public class Profile {
     @SerializedName("flag_image")
     private String mFlagImage;
 
+    /***** GETTERS AND SETTERS *****/
+    
     public String getName() {
         return mName;
     }
