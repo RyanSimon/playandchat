@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * @author Ryan Simon
@@ -18,13 +17,13 @@ public class JsonUtil {
     
     /**
      * Converts a JSON file stored in an app's assets folder to an Object of type 
-     * jsonModel.getClass()
+     * typeToken.getType()
      *
      * @param context; current app context
      * @param typeToken; represents the JSON data model type
      * @param filePath; the path to the JSON file
      * @param fileName; the name of the JSON file
-     * @return an Object of the type jsonModel.getClass()
+     * @return an Object of the type typeToken.getType()
      */
     public static Object loadJsonFromAssets(Context context, TypeToken<?> typeToken, String filePath, String fileName) {
         Object newJsonModel;
@@ -51,7 +50,7 @@ public class JsonUtil {
      * @param typeToken; a generic TypeToken that represents the JSON data model
      * @param filePath; the path to the JSON file
      * @param fileName; the name of the JSON file
-     * @return an Object of the type jsonModel.getClass()
+     * @return an Object of the type typeToken.getType()
      */
     public static Object loadJsonFromExternal(TypeToken<?> typeToken, String filePath, String fileName) {
 
