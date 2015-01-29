@@ -136,6 +136,7 @@ public class ProfileActivity extends ActionBarActivity {
         Picasso.with(this).load(profile.getPhotoUrl())
                 .into(profileImage);
         
+        editProfile.setVisibility(View.VISIBLE);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

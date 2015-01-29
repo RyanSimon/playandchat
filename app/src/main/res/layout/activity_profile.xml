@@ -79,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/location_container"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:visibility="invisible" >
 
                 <!-- quick and dirty way to do this for now -->
                 <me.ryansimon.playandchat.widget.TypefaceButton
