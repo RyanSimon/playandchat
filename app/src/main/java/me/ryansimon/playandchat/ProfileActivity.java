@@ -16,9 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +32,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.ryansimon.playandchat.api.model.Game;
 import me.ryansimon.playandchat.api.model.Profile;
 import me.ryansimon.playandchat.util.JsonUtil;
-import me.ryansimon.playandchat.widget.TypefaceButton;
 import me.ryansimon.playandchat.widget.TypefaceTextView;
 
 /**
@@ -46,6 +43,13 @@ public class ProfileActivity extends ActionBarActivity {
      * Layout vars 
      */
     private RecyclerView mGameListView;
+    private TypefaceTextView mUserName;
+    private TypefaceTextView mProfileId;
+    private TypefaceTextView mLocation;
+    private ImageView mUserCountryFlag;
+    private ImageView mBackgroundImage;
+    private CircleImageView mProfileImage;
+    private View mEditProfile;
     
     private static final String PROFILE_URL = "http://prototype.playchat.net/test/profile.json";
 
@@ -57,6 +61,15 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
 
         setupToolbar();
+
+        // get layout vars
+        mUserName = (TypefaceTextView) findViewById(R.id.name);
+        mProfileId = (TypefaceTextView) findViewById(R.id.profile_id);
+        mLocation = (TypefaceTextView) findViewById(R.id.location);
+        mUserCountryFlag = (ImageView) findViewById(R.id.user_country_flag);
+        mBackgroundImage = (ImageView) findViewById(R.id.background_image);
+        mProfileImage = (CircleImageView) findViewById(R.id.profile_image);
+        mEditProfile = findViewById(R.id.edit_profile_btn);
         
         // setup our RecyclerView
         mGameListView = (RecyclerView) findViewById(R.id.game_list);
@@ -111,33 +124,30 @@ public class ProfileActivity extends ActionBarActivity {
                 "profile.json"
         );
 
-        // get layout vars
-        TypefaceTextView userName = (TypefaceTextView) findViewById(R.id.name);
-        TypefaceTextView profileId = (TypefaceTextView) findViewById(R.id.profile_id);
-        TypefaceTextView location = (TypefaceTextView) findViewById(R.id.location);
-        ImageView userCountryFlag = (ImageView) findViewById(R.id.user_country_flag);
-        ImageView backgroundImage = (ImageView) findViewById(R.id.background_image);
-        CircleImageView profileImage = (CircleImageView) findViewById(R.id.profile_image);
-        View editProfile = findViewById(R.id.edit_profile_btn);
-
+        loadProfileContent(profile);
+        
+        setupGameList();
+    }
+    
+    private void loadProfileContent(Profile profile) {
         // load content
-        userName.setText(profile.getName());
-        
-        profileId.setText("(" + profile.getPlayChatId() + ")");
-        
-        location.setText(profile.getLocation());
-        
+        mUserName.setText(profile.getName());
+
+        mProfileId.setText("(" + profile.getPlayChatId() + ")");
+
+        mLocation.setText(profile.getLocation());
+
         Picasso.with(this).load(profile.getFlagImage())
-                .into(userCountryFlag);
-        
+                .into(mUserCountryFlag);
+
         Picasso.with(this).load(profile.getBackgroundImage())
-                .into(backgroundImage);
+                .into(mBackgroundImage);
 
         Picasso.with(this).load(profile.getPhotoUrl())
-                .into(profileImage);
-        
-        editProfile.setVisibility(View.VISIBLE);
-        editProfile.setOnClickListener(new View.OnClickListener() {
+                .into(mProfileImage);
+
+        mEditProfile.setVisibility(View.VISIBLE);
+        mEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
@@ -150,8 +160,6 @@ public class ProfileActivity extends ActionBarActivity {
                 builder.show();
             }
         });
-        
-        setupGameList();
     }
     
     private void setupGameList() {
