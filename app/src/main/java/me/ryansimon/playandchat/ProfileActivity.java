@@ -177,7 +177,7 @@ public class ProfileActivity extends ActionBarActivity {
             mProfileFileProgressDialog.setIndeterminate(false);
             mProfileFileProgressDialog.setMax(100);
             mProfileFileProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProfileFileProgressDialog.setCancelable(true);
+            mProfileFileProgressDialog.setCancelable(false);
             mProfileFileProgressDialog.show();
         }
         
