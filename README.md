@@ -27,7 +27,7 @@ Play and Chat's Toolbar overlays all the content on the screen with a transparen
 Since I'm pulling in JSON files and converting them into Objects, GSON was a great choice for JSON to Object conversion.
 
 #### CircleImageView [[link]](https://github.com/hdodenhof/CircleImageView)
-Great little library that handles the rather common task of taking a Bitmap, and creating a circle out of it. Play and Chat's user profile image and games images take advantage of this very useful tool.
+Great little library that handles the rather common task of taking a Bitmap, and creating a circle out of it. Play and Chat's user profile image and game images take advantage of this very useful tool.
 
 #### Picasso [[link]](http://square.github.io/picasso/)
 Using the power of the legendary artist (maybe?), the Picasso library eases the pain of querying, caching, and resizing images.
