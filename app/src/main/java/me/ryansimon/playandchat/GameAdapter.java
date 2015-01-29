@@ -1,5 +1,6 @@
 package me.ryansimon.playandchat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -84,6 +85,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
                 @Override
                 public void onClick(View v) {
                     v.getContext().startActivity(new Intent(v.getContext(),GameActivity.class));
+                    Activity activity = (Activity) v.getContext();
+                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             });
         }

@@ -38,6 +38,7 @@ public class GameActivity extends ActionBarActivity {
 
         if (id == android.R.id.home) {
             startActivity(new Intent(this,ProfileActivity.class));
+            overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         }
         else if (id == R.id.action_settings) {
             return true;
