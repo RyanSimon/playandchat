@@ -105,11 +105,10 @@ public class ProfileActivity extends ActionBarActivity {
     }
     
     private void setupProfileUI() {
-        Gson gson = new Gson();
-        Profile profile = gson.fromJson(
-                JsonUtil.loadJsonFromExternal(Environment.getExternalStorageDirectory().toString(),
-                        "profile.json"),
-                Profile.class
+        Profile profile = (Profile) JsonUtil.loadJsonFromExternal(
+                new TypeToken<Profile>(){},
+                Environment.getExternalStorageDirectory().toString(),
+                "profile.json"
         );
 
         // get layout vars
@@ -156,9 +155,8 @@ public class ProfileActivity extends ActionBarActivity {
     
     private void setupGameList() {
         // get items
-        Gson gson = new Gson();
-        List<Game> gameList = gson.fromJson(JsonUtil.loadJsonFromAssets(this,"json/","games.json"),
-                new TypeToken<List<Game>>(){}.getType());
+        TypeToken<List<Game>> typeToken = new TypeToken<List<Game>>(){};
+        List<Game> gameList = (List<Game>) JsonUtil.loadJsonFromAssets(this, typeToken,"json/", "games.json");
 
         mGameListView.setAdapter(new GameAdapter(gameList));
     }
